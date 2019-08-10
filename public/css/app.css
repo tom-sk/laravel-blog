@@ -7609,6 +7609,10 @@ textarea {
   width: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 .single-blog .content {
   text-align: left;
 }

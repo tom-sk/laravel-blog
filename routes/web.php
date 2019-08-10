@@ -27,3 +27,7 @@ Route::post('/edit/{blog}', 'BlogController@update');
 Route::post('/delete/{blog}', 'BlogController@destroy');
 
 Route::post('/new-comment/{blog}', 'CommentController@store');
+
+
+Route::get('/settings', 'UserController@settings')->name('settings');
+Route::post('/update-settings', 'UserController@update');
