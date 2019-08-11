@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class BlogController extends Controller
 {
@@ -55,9 +57,26 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        $comments = '';
+
+        if($blog->comments){
+            $comments = $blog->comments->where('commentable_id', $blog->id);
+        }
+
+        if($comments){
+            $comments = $comments->get();
+
+            foreach ($comments as $comment){
+                if($comment->comments){
+                    $newComment = Comment::find($comment->id);
+                    $comment->replies = $newComment->comments->where('commentable_id', $comment ->id)->get();
+                }
+            }
+        }
+
         return view('single', [
-            'blog' => $blog
+            'blog' => $blog,
+            'comments' => $comments
         ]);
     }
 

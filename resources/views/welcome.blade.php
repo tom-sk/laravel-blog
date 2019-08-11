@@ -28,21 +28,28 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+            <div class="posts"> 
+                <div class="max-w-2xl mx-auto bg-gray-200">
+
+                    <div class="card-body">
+                        @foreach($blogs as $post)
+
+                                <div class="shadow-xl bg-gray-700 text-white p-6 rounded-lg">
+
+                                    <a href='blog/{{$post->id}}' class="m-2">{{ $post->title }}</a  >
+                                    <p class="m-2">{{ str_limit($post->content, $limit = 150, $end = '...') }}</p>
+                                    <p class="m-2">{{ date('d/m/Y', strtotime($post->created_at)) }}</p>
+
+                                    </div>
+
+
+                            <br>
+                        @endforeach
+                    </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
+
         </div>
 
         <div id="app"></div>

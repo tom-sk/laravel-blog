@@ -21,11 +21,43 @@
             <div class="card-body">
                 <h4>Comments</h4>
 
-                @foreach ($blog->comments as $comment)
-                    <div>{{ $comment->content}}</div>
-                    <div>User: {{ $comment->user->name}}</div>
-                    <hr>
-                @endforeach
+                @if($comments)
+                    @foreach ($comments as $comment)
+
+                        <div>{{ $comment->content}}</div>
+                        <div>User: {{ $comment->user->name}}</div>
+
+                        <div>
+                            Replies
+
+                            @if($comment->replies)
+                                    @foreach($comment->replies as $reply)
+                                        <div class="ml-6 p-2 bg-gray-500">
+                                            {{$reply->content}}
+                                        </div>
+                                    <br>
+                                    @endforeach
+                            @endif
+                        </div>
+
+                        <div class="reply-form">
+                            <a href="#">Reply</a>
+
+                            <form action="{{url('reply')}}/{{$comment->id}}" method="post">
+                                {{ csrf_field() }}
+
+                                <div class="form-group">
+                                    <textarea name="comment" id="comment" cols="30" rows="2 "></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                    @endforeach
+                @endif
 
                 <br>
 

@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@allPosts');
 
 Auth::routes();
 
@@ -27,7 +26,9 @@ Route::post('/edit/{blog}', 'BlogController@update');
 Route::post('/delete/{blog}', 'BlogController@destroy');
 
 Route::post('/new-comment/{blog}', 'CommentController@store');
+Route::post('/reply/{comment}', 'CommentController@reply');
 
 
 Route::get('/settings', 'UserController@settings')->name('settings');
 Route::post('/update-settings', 'UserController@update');
+

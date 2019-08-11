@@ -41,7 +41,9 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->content = $request->comment;
         $comment->user_id = $user->id;
-        $comment->blog_id = $blog->id;
+//        $comment->blog_id = $blog->id;
+        $comment->commentable_id = $blog->id;
+        $comment->commentable_type = 'App\Blog';
         $comment->save();
 
         return redirect()->back();
@@ -90,5 +92,19 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         //
+    }
+
+    public function reply(Request $request, Comment $comment)
+    {
+        $user = auth()->user();
+
+        $reply = new Comment;
+        $reply->content = $request->comment;
+        $reply->user_id = $user->id;
+        $reply->commentable_id = $comment->id;
+        $reply->commentable_type = 'App\Comment';
+        $reply->save();
+
+        return redirect()->back();
     }
 }

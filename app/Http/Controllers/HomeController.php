@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Comment;
+use App\Blog;
 
 class HomeController extends Controller
 {
@@ -32,6 +34,15 @@ class HomeController extends Controller
 
         return view('home', [
             'posts' => $posts
+        ]);
+    }
+
+    public function allPosts()
+    {
+        $allBlogs = Blog::all();
+
+        return view('welcome', [
+            'blogs' => $allBlogs
         ]);
     }
 }
