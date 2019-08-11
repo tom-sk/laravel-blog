@@ -60,16 +60,16 @@ class BlogController extends Controller
         $comments = '';
 
         if($blog->comments){
-            $comments = $blog->comments->where('commentable_id', $blog->id);
+            $comments = $blog->comments;
         }
 
         if($comments){
-            $comments = $comments->get();
+            $comments = $comments;
 
             foreach ($comments as $comment){
                 if($comment->comments){
                     $newComment = Comment::find($comment->id);
-                    $comment->replies = $newComment->comments->where('commentable_id', $comment ->id)->get();
+                    $comment->replies = $newComment->comments;
                 }
             }
         }

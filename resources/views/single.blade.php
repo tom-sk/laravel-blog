@@ -24,20 +24,23 @@
                 @if($comments)
                     @foreach ($comments as $comment)
 
-                        <div>{{ $comment->content}}</div>
-                        <div>User: {{ $comment->user->name}}</div>
-
                         <div>
-                            Replies
+                            <div class="p-2 bg-gray-700 text-white mb-4">
+                                <div>User: {{ $comment->user->name}}</div>
+                                <div>{{ $comment->content}}</div>
+                            </div>
 
-                            @if($comment->replies)
-                                    @foreach($comment->replies as $reply)
-                                        <div class="ml-6 p-2 bg-gray-500">
-                                            {{$reply->content}}
-                                        </div>
-                                    <br>
-                                    @endforeach
-                            @endif
+                                <div>
+                                    @if($comment->replies)
+                                        @foreach($comment->replies as $reply)
+                                            <div class="ml-6 p-2  bg-gray-500">
+                                                User: {{$reply->user->name}}<br>
+                                                {{$reply->content}}
+                                            </div>
+                                            <br>
+                                        @endforeach
+                                    @endif
+                                </div>
                         </div>
 
                         <div class="reply-form">
@@ -51,7 +54,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                                    <button type="submit" class="btn btn-outline-primary">Add Reply</button>
                                 </div>
                             </form>
                         </div>

@@ -8,6 +8,6 @@ class Blog extends Model
 {
     public function comments()
     {
-        return $this->morphOne('App\Comment', 'commentable');
+        return $this->morphMany('App\Comment', 'commentable');
     }
 }
